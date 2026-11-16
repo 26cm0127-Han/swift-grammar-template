@@ -1,6 +1,3 @@
-// week01 の演習を終えた main.swift を、このファイルに Upload files で上書きしてください。
-// 教材コードは swift-grammar-code の week01/main.swift を Raw 表示から全選択コピーして Xcode に貼ります。
-
 // week01: 型と制御構文の再確認、配列・辞書・範囲
 // このプログラムは、1CM1 の成績を並べ替えたり、合格した人を数えたり、
 // 名前から点数を引いたりします。
@@ -126,7 +123,12 @@ for (name, score) in scoreOf {
 //        0..<names.count で回して、if で選びます
 
 var passers: [String] = []
-// ここに書く
+for i in 0..<names.count{
+    if scores[i] >= 60{
+        passers.append(names[i])
+    }
+}
+print(passers)
 
 check("演習1 合格者は4名", passers.count == 4)
 check("演習1 並び順は names のまま", passers == ["電子太郎", "山田一郎", "佐藤みなみ", "グエン・アン"])
@@ -134,7 +136,12 @@ check("演習1 並び順は names のまま", passers == ["電子太郎", "山�
 // 演習2: scoreOf を for-in で回して、80点以上の人数を highScorers に入れてください
 
 var highScorers = 0
-// ここに書く
+for score in scores {
+    if score >= 80 {
+        highScorers += 1
+    }
+}
+print(highScorers)
 
 check("演習2 80点以上は2名", highScorers == 2)
 
@@ -143,7 +150,11 @@ check("演習2 80点以上は2名", highScorers == 2)
 
 var total = 0
 var average = 0.0
-// ここに書く
+for score in scores {
+    total += score
+}
+average = Double(total) / Double(scores.count)
+print(total,average)
 
 check("演習3 合計は360", total == 360)
 check("演習3 平均は72.0", average == 72.0)
@@ -165,3 +176,41 @@ check("演習3 平均は72.0", average == 72.0)
 //  多分岐            switch (x) { case 1: ... break; }   switch x { case 1: ... }
 //                    break を書かないと次に落ちる           break は不要。網羅していないとエラー
 //  暗黙の型変換       int から double は自動               自動変換なし。Double(n) と書く
+
+
+
+var failers: [String] = []
+for i in 0..<names.count {
+    if scores[i] < 60 {
+        failers.append(names[i])
+    }
+}
+print(failers)
+
+// 練習1: 60点より低い人を数える（数える形）
+var failCount = 0
+for score in scores {
+    if score < 60{
+        failCount += 1
+    }
+}
+print(failCount)
+
+//練習2：辞書 scoreOf で、70点より低い人を数える（数える形
+var lowCount = 0
+for(name,score) in scoreOf {
+    if score < 70 {
+        print(name)
+        lowCount += 1
+    }
+}
+print(lowCount)
+
+//練習3：欠席した日数の合計と平均（足す形）
+let absences = [0, 2, 1, 5, 0]
+var absenceTotal = 0
+for absence in absences {
+    absenceTotal += absence
+}
+let absenceAverage = Double(absenceTotal) / Double(absences.count)
+print(absenceTotal, absenceAverage)
